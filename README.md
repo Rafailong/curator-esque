@@ -17,10 +17,10 @@ var ServiceInstanceBuilder  = require('curator-esque').ServiceInstanceBuilder;
 var ServiceDiscoveryBuilder = require('curator-esque').ServiceDiscoveryBuilder;
 
 // Client
-var curatorEsque = CuratorEsque.newClient('127.0.0.1:2181');
+var zoologistClient = CuratorEsque.newClient('127.0.0.1:2181');
 
 // Start the client (connect to ZooKeeper)
-curatorEsque.start();
+zoologistClient.start();
 
 // Service Instance
 var serviceInstance = ServiceInstanceBuilder
@@ -34,7 +34,7 @@ var serviceInstance = ServiceInstanceBuilder
 // Service Discovery
 var serviceDiscovery = ServiceDiscoveryBuilder
                          .builder()
-                         .client(curatorEsque)
+                         .client(zoologistClient)
                          .thisInstance(serviceInstance)
                          .basePath('services')
                          .build();
@@ -61,10 +61,10 @@ var ServiceInstanceBuilder  = require('curator-esque').ServiceInstanceBuilder;
 var ServiceDiscoveryBuilder = require('curator-esque').ServiceDiscoveryBuilder;
 
 // Client
-var curatorEsque = CuratorEsque.newClient('127.0.0.1:2181');
+var zoologistClient = CuratorEsque.newClient('127.0.0.1:2181');
 
 // Start the client (connect to ZooKeeper)
-curatorEsque.start();
+zoologistClient.start();
 
 // Service Instance
 var serviceInstance = ServiceInstanceBuilder
@@ -77,7 +77,7 @@ var serviceInstance = ServiceInstanceBuilder
 // Service Discovery
 var serviceDiscovery = ServiceDiscoveryBuilder
                          .builder()
-                         .client(curatorEsque)
+                         .client(zoologistClient)
                          .thisInstance(serviceInstance)
                          .basePath('services')
                          .build();
