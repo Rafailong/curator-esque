@@ -54,6 +54,39 @@ describe('ServiceDiscovery', function () {
     })
   })
 
+
+  it('should register a service with no name so the ID of the service will be assigned as name', function (done) {
+    var serviceInstanceWithoutName =
+      ServiceInstanceBuilder
+        .builder()
+        .address('localhost')
+        .port(12345)
+        .build()
+
+    var serviceDiscovery2 =
+      builder
+        .client(client)
+        .thisInstance(serviceInstanceWithoutName)
+        .basePath('services')
+        .build()
+
+    serviceDiscovery2.registerService(function onRegister (err, data) {
+      data.id.should.be.a('string')
+      data.name.should.be.a('string')
+
+      // !!!!!!!!!!
+      data.id.should.equal(data.name)
+
+      data.address.should.be.a('string')
+      data.port.should.be.a('number')
+      data.registrationResponse.should.not.be.null
+      data.registrationResponse.should.be.a('array')
+      data.registrationResponse.should.not.be.empty
+      done()
+    })
+  })
+
+
   it('should unregister a service when calling unRegisterService()', function (done) {
     serviceDiscovery.registerService(function (err, data) {
       serviceDiscovery.unRegisterService(data.id, function (err, res) {
