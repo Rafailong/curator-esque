@@ -1,6 +1,6 @@
 {
-  "name": "zoologist",
-  "version": "0.4.14",
+  "name": "curator-esque",
+  "version": "0.0.1",
   "description": "A Curator-esque framework for ZooKeeper",
   "main": "index.js",
   "keywords": [
@@ -12,12 +12,12 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/ph0bos/zoologist"
+    "url": "https://github.com/Rafailong/zoologist"
   },
   "scripts": {
     "test": "mocha --recursive --reporter spec test/*"
   },
-  "author": "Steven Robinson",
+  "author": "Rafailong",
   "license": "ISC",
   "dependencies": {
     "async": "^0.9.0",
@@ -32,7 +32,6 @@
   },
   "devDependencies": {
     "mocha": "1.x.x",
-    "chai": "1.x.x",
-    "mockery": "^1.4.0"
+    "chai": "1.x.x"
   }
 }
