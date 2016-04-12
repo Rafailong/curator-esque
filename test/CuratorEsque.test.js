@@ -9,7 +9,7 @@ describe('CuratorEsque', function () {
     curatorEsque = CuratorEsque.newClient('127.0.0.1:2181')
   })
 
-  it('should create an instance of Zoologist when calling newClient()', function () {
+  it('should create an instance of CuratorEsque when calling newClient()', function () {
     curatorEsque.should.be.a('object')
   })
 

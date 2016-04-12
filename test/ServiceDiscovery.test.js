@@ -20,6 +20,7 @@ describe('ServiceDiscovery', function () {
           .address('localhost')
           .port(12345)
           .name('my/service/v1')
+          .payload({ data: 'user defined payload' })
           .build()
 
       serviceDiscovery =
@@ -41,8 +42,14 @@ describe('ServiceDiscovery', function () {
 
   it('should register a service when calling registerService()', function (done) {
     serviceDiscovery.registerService(function (err, data) {
+      data.id.should.be.a('string')
+      data.name.should.be.a('string')
       data.address.should.be.a('string')
       data.port.should.be.a('number')
+      data.payload.should.be.a('object')
+      data.registrationResponse.should.not.be.null
+      data.registrationResponse.should.be.a('array')
+      data.registrationResponse.should.not.be.empty
       done()
     })
   })
