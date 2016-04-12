@@ -1,11 +1,9 @@
-# Zoologist
-A Curator-esque ZooKeeper framework for Node.js.
-
-[![NPM](https://nodei.co/npm/zoologist.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/zoologist/)
+# curator-esque
+A Curator-esque ZooKeeper framework for Node.js based on [ph0bos/zoologist](https://github.com/ph0bos/zoologist/blob/master/lib/ServiceInstance.js)
 
 ## Installation
 
-    npm install zoologist --save
+    npm install curator-esque --save
 
 ## Examples
 

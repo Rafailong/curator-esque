@@ -1,7 +1,7 @@
 {
   "name": "curator-esque",
   "version": "0.0.1",
-  "description": "A Curator-esque framework for ZooKeeper",
+  "description": "A Curator-esque framework for ZooKeeper based on ph0bos/zoologist package.",
   "main": "index.js",
   "keywords": [
     "zookeeper",

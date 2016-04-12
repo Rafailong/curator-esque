@@ -1,20 +1,19 @@
-  var mocha   = require('mocha');
-var mockery = require('mockery');
-var should  = require('chai').should();
+var mocha = require('mocha')
+var mockery = require('mockery')
+var should = require('chai').should()
 
-var Zoologist               = require('..').Zoologist;
-var ServiceInstanceBuilder  = require('..').ServiceInstanceBuilder;
-var ServiceDiscoveryBuilder = require('..').ServiceDiscoveryBuilder;
-var ServiceProviderBuilder  = require('..').ServiceProviderBuilder;
+var CuratorEsque = require('..').CuratorEsque
+var ServiceInstanceBuilder = require('..').ServiceInstanceBuilder
+var ServiceDiscoveryBuilder = require('..').ServiceDiscoveryBuilder
+var ServiceProviderBuilder = require('..').ServiceProviderBuilder
 
-describe('ServiceDiscovery', function() {
-
-  beforeEach(function(done){
-    client  = Zoologist.newClient('127.0.0.1:2181');
-    client.start();
+describe('ServiceDiscovery', function () {
+  beforeEach(function (done) {
+    client = CuratorEsque.newClient('127.0.0.1:2181')
+    client.start()
 
     client.once('connected', function () {
-      builder = ServiceDiscoveryBuilder.builder();
+      builder = ServiceDiscoveryBuilder.builder()
 
       serviceInstance =
         ServiceInstanceBuilder
@@ -22,28 +21,28 @@ describe('ServiceDiscovery', function() {
           .address('localhost')
           .port(12345)
           .name('my/service/v1')
-          .build();
+          .build()
 
       serviceDiscovery =
         builder
           .client(client)
           .thisInstance(serviceInstance)
           .basePath('services')
-          .build();
+          .build()
 
       serviceProvider =
         ServiceProviderBuilder.builder()
           .serviceDiscovery(serviceDiscovery)
           .providerStrategy('RoundRobin')
-          .build();
+          .build()
 
-      serviceDiscovery.registerService(function onRegister(err, data) {
-        done();
-      });
-    });
-  });
+      serviceDiscovery.registerService(function onRegister (err, data) {
+        done()
+      })
+    })
+  })
 
-  it('should create a service provider builder instance', function() {
-    serviceProvider.should.be.a('object');
-  });
-});
+  it('should create a service provider builder instance', function () {
+    serviceProvider.should.be.a('object')
+  })
+})
