@@ -12,15 +12,15 @@ A Curator-esque ZooKeeper framework for Node.js based on [ph0bos/zoologist](http
 ```javascript
 'use strict';
 
-var Zoologist               = require('zoologist').Zoologist;
-var ServiceInstanceBuilder  = require('zoologist').ServiceInstanceBuilder;
-var ServiceDiscoveryBuilder = require('zoologist').ServiceDiscoveryBuilder;
+var CuratorEsque               = require('zoologist').CuratorEsque;
+var ServiceInstanceBuilder  = require('curator-esque').ServiceInstanceBuilder;
+var ServiceDiscoveryBuilder = require('curator-esque').ServiceDiscoveryBuilder;
 
 // Client
-var zoologistClient = Zoologist.newClient('127.0.0.1:2181');
+var curatorEsque = CuratorEsque.newClient('127.0.0.1:2181');
 
 // Start the client (connect to ZooKeeper)
-zoologistClient.start();
+curatorEsque.start();
 
 // Service Instance
 var serviceInstance = ServiceInstanceBuilder
@@ -28,12 +28,13 @@ var serviceInstance = ServiceInstanceBuilder
                         .address('127.0.0.1')
                         .port(process.env.PORT)
                         .name('my/service/name/v1')
+                        .payload({ message: 'custom user defined information' })
                         .build();
 
 // Service Discovery
 var serviceDiscovery = ServiceDiscoveryBuilder
                          .builder()
-                         .client(zoologistClient)
+                         .client(curatorEsque)
                          .thisInstance(serviceInstance)
                          .basePath('services')
                          .build();
@@ -55,15 +56,15 @@ serviceDiscovery.registerService(function onRegister(err, data) {
 ```javascript
 'use strict';
 
-var Zoologist               = require('zoologist').Zoologist;
-var ServiceInstanceBuilder  = require('zoologist').ServiceInstanceBuilder;
-var ServiceDiscoveryBuilder = require('zoologist').ServiceDiscoveryBuilder;
+var CuratorEsque               = require('curator-esque').CuratorEsque;
+var ServiceInstanceBuilder  = require('curator-esque').ServiceInstanceBuilder;
+var ServiceDiscoveryBuilder = require('curator-esque').ServiceDiscoveryBuilder;
 
 // Client
-var zoologistClient = Zoologist.newClient('127.0.0.1:2181');
+var curatorEsque = CuratorEsque.newClient('127.0.0.1:2181');
 
 // Start the client (connect to ZooKeeper)
-zoologistClient.start();
+curatorEsque.start();
 
 // Service Instance
 var serviceInstance = ServiceInstanceBuilder
@@ -76,7 +77,7 @@ var serviceInstance = ServiceInstanceBuilder
 // Service Discovery
 var serviceDiscovery = ServiceDiscoveryBuilder
                          .builder()
-                         .client(zoologistClient)
+                         .client(curatorEsque)
                          .thisInstance(serviceInstance)
                          .basePath('services')
                          .build();
