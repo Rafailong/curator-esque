@@ -30,9 +30,7 @@ describe('ServiceDiscovery', function () {
           .basePath('services')
           .build()
 
-      serviceDiscovery.registerService(function onRegister (err, data) {
-        done()
-      })
+      done()
     })
   })
 
@@ -42,6 +40,7 @@ describe('ServiceDiscovery', function () {
 
   it('should register a service when calling registerService()', function (done) {
     serviceDiscovery.registerService(function (err, data) {
+      if (err){ return  done(err) }
       data.id.should.be.a('string')
       data.name.should.be.a('string')
       data.address.should.be.a('string')
@@ -71,11 +70,13 @@ describe('ServiceDiscovery', function () {
         .build()
 
     serviceDiscovery2.registerService(function onRegister (err, data) {
+      if (err){ return  done(err) }
+
       data.id.should.be.a('string')
-      data.name.should.be.a('string')
 
       // !!!!!!!!!!
-      data.id.should.equal(data.name)
+      var regex = new RegExp(data.id, 'g')
+      data.registrationResponse[0].path.match(regex).length.should.equal(1)
 
       data.address.should.be.a('string')
       data.port.should.be.a('number')
@@ -123,9 +124,11 @@ describe('ServiceDiscovery', function () {
 
   it('should find service instances when calling queryForInstances() with a valid serviceId', function (done) {
     serviceDiscovery.registerService(function (err, data) {
+      if (err){ return  done(err) }
       data.address.should.be.a('string')
       data.port.should.be.a('number')
       serviceDiscovery.queryForInstances('my/service/v1', function (err, instances) {
+        if (err){ return  done(err) }
         should.not.exist(err)
         should.exist(instances)
         instances.should.be.instanceof(Array).and.not.have.lengthOf(0)
@@ -136,6 +139,7 @@ describe('ServiceDiscovery', function () {
 
   it('should find service instances when calling queryForInstances() with an invalid serviceId', function (done) {
     serviceDiscovery.registerService(function (err, data) {
+      if (err){ return  done(err) }
       data.address.should.be.a('string')
       data.port.should.be.a('number')
       serviceDiscovery.queryForInstances('my/service/v3', function (err, instances) {
